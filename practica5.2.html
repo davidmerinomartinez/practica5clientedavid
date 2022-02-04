@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        textoinputfilas = "introduce cantidad de filas";
+        textoinputcolumnas = "introduce cantidad de columnas";
+
+        //crear input columnas
+
+        elinputfilas = document.createElement("INPUT");     //creas el elemento
+        elinputfilas.setAttribute("type", "text");              //le anadimos el tipo
+        elinputfilas.setAttribute("id", "inputfilas");  //le anadimos una id
+        
+        elinputfilas.setAttribute("placeholder", "introduce numero filas"); // le anadimos un placehold
+
+        
+        document.body.appendChild(elinputfilas);        //lo colgamos de la rama principal
+
+        //crear input filas
+
+        elinputcolumnas = document.createElement("INPUT");     
+        elinputcolumnas.setAttribute("type", "text");
+        elinputcolumnas.setAttribute("id", "inputcolumnas");
+        
+        elinputcolumnas.setAttribute("placeholder", "introduce numero columnas");
+        document.body.appendChild(elinputcolumnas);
+
+        //crear boton
+
+        botoncreatabla = document.createElement("button");     
+        botoncreatabla.setAttribute("id", "elboton");
+        botoncreatabla.setAttribute("onclick", "generatabla()");
+        botoncreatabla.innerHTML = "Generar tabla";
+        
+        document.body.appendChild(botoncreatabla);
+       
+
+
+        // borrado de celdas
+        //input fila a borrar
+        inputborrafilas = document.createElement("INPUT");     
+        inputborrafilas.setAttribute("type", "text");
+        inputborrafilas.setAttribute("id", "inputborrafilas");
+        inputborrafilas.setAttribute("placeholder", "nºfila del");
+        document.body.appendChild(inputborrafilas);
+
+        //input columna a borrar
+        inputborracolumnas = document.createElement("INPUT");     
+        inputborracolumnas.setAttribute("type", "text");
+        inputborracolumnas.setAttribute("id", "inputborracolumnas");
+        inputborracolumnas.setAttribute("placeholder", "nºcolumn. del");
+        document.body.appendChild(inputborracolumnas);
+
+
+        //boton borrar
+        botonborracelda = document.createElement("button");  
+        botonborracelda.setAttribute("id", "botonborracelda");
+        botonborracelda.setAttribute("onclick", "borracelda()");
+        botonborracelda.innerHTML = "borrar celda";
+        
+        document.body.appendChild(botonborracelda);
+
+
+
+function borracelda(){
+    filadel=document.getElementById("inputborrafilas").value;
+    coldel=document.getElementById("inputborracolumnas").value;
+
+    filadelfin=filadel;
+    coldelfin=coldel;
+
+
+    document.getElementById("f"+filadel+"c"+coldel).remove();
+    alert ("Se ha borrado la celda situada en la fila "+filadelfin+" y en la columna "+coldelfin);
+
+
+}
+        
+
+        
+
+
+function generatabla(){
+
+    filasok=document.getElementById("inputfilas").value;
+    columnasok=document.getElementById("inputcolumnas").value;
+    
+    // Obtener la referencia del elemento body
+     body = document.getElementsByTagName("body")[0];
+      
+      // Crea un elemento <table> y un elemento <tbody>
+       tabla   = document.createElement("table");
+       tblBody = document.createElement("tbody");
+    
+      // Crea las celdas
+      for (var i = 0; i < filasok; i++) {
+        // Crea las filas de la tabla
+         fila = document.createElement("tr");
+    
+        for (var j = 0; j < columnasok; j++) {
+          // Crea un  <td> y un nodo de texto,  el nodo de
+          // texto es el contenido de <td>, posiciona <td> al final
+          // de la fila de la tabla
+           celda = document.createElement("td");
+           textoCelda = document.createTextNode("celda en la fila "+i+", columna "+j);
+           celda.setAttribute("id", "f"+i+"c"+j); //creamos el id concatenando la i y la j correspondiente con su nºfila y nºcolumna con f y c 
+          celda.appendChild(textoCelda);
+          fila.appendChild(celda);
+        }
+    
+        // agrega la fila al final de la tabla (al final del elemento tblbody)
+        tblBody.appendChild(fila);
+      }
+    
+      // posiciona el <tbody> debajo del elemento <table>
+      tabla.appendChild(tblBody);
+      // appends <table> into <body>
+      body.appendChild(tabla);
+      // modifica el atributo "border" de la tabla ;
+      tabla.setAttribute("border", "4");
+
+      
+};
+
+
+
+    </script>
+</body>
+
+</html>
